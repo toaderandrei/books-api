@@ -1,4 +1,4 @@
-package com.ant.books.ui.viewmodel
+package com.ant.books.viewmodel
 
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider

@@ -49,6 +49,7 @@ versions.kotlin = "1.2.41"
 versions.paging = "1.0.1"
 versions.work = "1.0.0-alpha04"
 versions.navigation = "1.0.0-alpha01"
+versions.moshi="1.6.0"
 def deps = [:]
 
 def support = [:]
@@ -126,6 +127,7 @@ deps.timber = "com.jakewharton.timber:timber:$versions.timber"
 deps.junit = "junit:junit:$versions.junit"
 deps.rxjava2 = "io.reactivex.rxjava2:rxjava:$versions.rxjava2"
 deps.rx_android = "io.reactivex.rxjava2:rxandroid:$versions.rx_android"
+deps.moshi = "com.squareup.moshi:moshi:$versions.moshi"
 deps.android_gradle_plugin = "com.android.tools.build:gradle:$versions.android_gradle_plugin"
 ext.deps = deps
 

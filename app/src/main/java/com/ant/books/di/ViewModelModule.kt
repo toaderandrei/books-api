@@ -1,7 +1,7 @@
 package com.ant.books.di
 
 import android.arch.lifecycle.ViewModelProvider
-import com.ant.books.ui.viewmodel.BooksViewModelFactory
+import com.ant.books.viewmodel.BooksViewModelFactory
 import dagger.Binds
 import dagger.Module
 

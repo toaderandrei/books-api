@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
-
+apply plugin: 'org.jetbrains.kotlin.android.extensions'
 apply plugin: 'kotlin-allopen'
 apply plugin: 'androidx.navigation.safeargs'
 
@@ -19,6 +19,9 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "GOOGLEBOOKS_API_ENDPOINT", '"https://www.googleapis.com"'
+
     }
     buildTypes {
         release {
@@ -29,6 +32,9 @@ android {
 
     dataBinding {
         enabled = true
+    }
+    androidExtensions {
+        experimental = true
     }
 
     compileOptions {
@@ -53,12 +59,20 @@ dependencies {
     implementation deps.lifecycle.java8
     implementation deps.retrofit.runtime
     implementation deps.retrofit.gson
+    implementation deps.moshi
 
     implementation deps.dagger.runtime
     implementation deps.dagger.android
     implementation deps.dagger.android_support
     implementation deps.constraint_layout
     implementation deps.kotlin.stdlib
+
+    implementation 'com.squareup.retrofit2:converter-moshi:2.3.0'
+    //rxjava
+    implementation deps.rxjava2
+    implementation deps.rx_android
+
+    androidTestImplementation deps.navigation.testing_ktx
 
     implementation deps.timber
 
