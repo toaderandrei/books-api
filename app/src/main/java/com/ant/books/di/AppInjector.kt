@@ -34,7 +34,7 @@ object AppInjector {
     fun init(booksApp: BooksApp) {
         DaggerAppComponent
                 .builder()
-                .applicatiomn(booksApp)
+                .application(booksApp)
                 .build().inject(booksApp)
 
         booksApp

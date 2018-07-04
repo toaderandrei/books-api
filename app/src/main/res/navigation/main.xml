@@ -38,7 +38,7 @@
     </fragment>
     <fragment
         android:id="@+id/bookDetailsFragment"
-        android:name="com.ant.books.fragments.BooksDetailFragment"
+        android:name="com.ant.books.fragments.BookDetailFragment"
         android:label="BooksDetailFragment">
 
         <action
