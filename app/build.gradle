@@ -19,7 +19,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
+        multiDexEnabled true
         buildConfigField "String", "GOOGLEBOOKS_API_ENDPOINT", '"https://www.googleapis.com"'
 
     }
@@ -49,36 +49,55 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    //support
     implementation deps.support.app_compat
     implementation deps.support.recyclerview
     implementation deps.support.cardview
     implementation deps.support.design
+
+    //nav
     implementation deps.navigation.fragment_ktx
+
+    //lifecycle
     implementation deps.lifecycle.runtime
     implementation deps.lifecycle.extensions
     implementation deps.lifecycle.java8
+
+    //retrofit
     implementation deps.retrofit.runtime
     implementation deps.retrofit.gson
     implementation deps.moshi
 
+    //dagger
     implementation deps.dagger.runtime
     implementation deps.dagger.android
     implementation deps.dagger.android_support
+
+    kapt deps.dagger.android_support_compiler
+    kapt deps.dagger.compiler
+
+    //constraint layout
     implementation deps.constraint_layout
     implementation deps.kotlin.stdlib
 
-    implementation 'com.squareup.retrofit2:converter-moshi:2.3.0'
+    //room
+    implementation deps.room.runtime
+
     //rxjava
     implementation deps.rxjava2
     implementation deps.rx_android
 
-    androidTestImplementation deps.navigation.testing_ktx
-
+    //timber
     implementation deps.timber
 
-    kapt deps.dagger.android_support_compiler
-    kapt deps.dagger.compiler
+    //todo put this to dependencies.
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation 'com.squareup.retrofit2:converter-moshi:2.3.0'
     implementation 'com.google.apis:google-api-services-books:v1-rev99-1.23.0'
+
+
+    androidTestImplementation deps.navigation.testing_ktx
 
     //test
     testImplementation 'junit:junit:4.12'

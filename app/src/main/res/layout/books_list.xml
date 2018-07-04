@@ -5,6 +5,10 @@
     <data>
 
 
+        <variable
+            name="book"
+            type="com.ant.books.db.Book" />
+
     </data>
 
     <android.support.constraint.ConstraintLayout
@@ -21,10 +25,10 @@
             android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="@{@string/repo_full_name(repo.owner.login, repo.name)}"
+            android:text="@{@string/book_name(book.volumeInfo.title, book.volumeInfo.subtitle)}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:visibleGone="@{repo != null}"
+            app:visibleGone="@{book != null}"
             tools:text="Books List" />
 
         <android.support.v7.widget.RecyclerView
