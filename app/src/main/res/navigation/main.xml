@@ -22,9 +22,9 @@
         android:name="com.ant.books.fragments.BookSearchFragment"
         android:label="SearchFragment">
         <action
-            android:id="@+id/showBooks"
-            destination="@+id/booksFragment"
-            app:destination="@id/booksFragment" />
+            android:id="@+id/showBook"
+            destination="@+id/bookDetailsFragment"
+            app:destination="@id/bookDetailsFragment" />
     </fragment>
 
     <fragment
@@ -40,6 +40,10 @@
         android:id="@+id/bookDetailsFragment"
         android:name="com.ant.books.fragments.BookDetailFragment"
         android:label="BooksDetailFragment">
+
+        <argument
+            android:name="book"
+            app:type="string" />
 
         <action
             android:id="@+id/back_button"

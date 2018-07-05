@@ -13,7 +13,8 @@ import com.ant.books.threading.AppExecutors
 class RepoListAdapter(
         private val dataBindingComponent: DataBindingComponent,
         private val showDescription: Boolean,
-        appExecutors: AppExecutors
+        appExecutors: AppExecutors,
+        val bookClickCallback: ((Book) -> Unit)?
 ) : BaseListAdapter<Book, BookItemBinding>(
         appExecutors = appExecutors,
         itemCallback = object : DiffUtil.ItemCallback<Book>() {
@@ -42,7 +43,13 @@ class RepoListAdapter(
                 dataBindingComponent)
 
         itemBinding.showDescription = showDescription
-        //todo add click listener.s
+
+        //callback listener.
+        itemBinding.root.setOnClickListener {
+            itemBinding.book?.let {
+                bookClickCallback?.invoke(it)
+            }
+        }
         return itemBinding
     }
 }

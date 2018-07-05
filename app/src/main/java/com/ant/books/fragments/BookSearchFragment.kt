@@ -14,6 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
+import androidx.navigation.fragment.findNavController
 import com.ant.books.R
 import com.ant.books.adapters.RepoListAdapter
 import com.ant.books.binding.FragmentDataBindingComponent
@@ -37,7 +38,7 @@ class BookSearchFragment : Fragment(), Injectable {
     lateinit var viewmodelFactory: ViewModelProvider.Factory
 
     lateinit var bookSearchViewModel: BookSearchViewModel
-    //var binding?
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(
@@ -62,6 +63,10 @@ class BookSearchFragment : Fragment(), Injectable {
                 dataBindingComponent,
                 true,
                 appExecutors)
+        { book ->
+            //todo check if Int can be accepted.
+            navController().navigate(BookSearchFragmentDirections.showBook(book.id.toString()))
+        }
 
         binding.repoList.adapter = rvAdapter
 
@@ -108,4 +113,6 @@ class BookSearchFragment : Fragment(), Injectable {
         val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(windowToken, 0)
     }
+
+    fun navController() = findNavController()
 }
