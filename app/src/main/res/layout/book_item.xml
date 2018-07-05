@@ -21,7 +21,7 @@
     <data>
 
         <variable
-            name="showFullName"
+            name="showDescription"
             type="boolean" />
 
         <variable
@@ -45,7 +45,7 @@
                 android:layout_marginLeft="@dimen/default_margin"
                 android:layout_marginStart="@dimen/default_margin"
                 android:layout_marginTop="16dp"
-                android:text="@{showFullName ? book.volumeInfo.title : book.volumeInfo.subtitle}"
+                android:text="@{book.volumeInfo.title}"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Book title" />
 
@@ -59,6 +59,7 @@
                 android:text="@{book.volumeInfo.description}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/book_title"
+                app:visibleGone="@{!showDescription}"
                 tools:layout_editor_absoluteX="@dimen/default_margin"
                 tools:text="Book description" />
 
