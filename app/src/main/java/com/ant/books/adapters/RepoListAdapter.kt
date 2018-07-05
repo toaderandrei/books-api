@@ -30,7 +30,7 @@ class RepoListAdapter(
         }) {
 
     override fun bind(binding: BookItemBinding, item: Book) {
-
+        binding.book = item
     }
 
 
