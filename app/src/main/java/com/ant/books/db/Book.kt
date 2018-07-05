@@ -11,7 +11,6 @@ import android.arch.persistence.room.Index
         ],
         primaryKeys = ["id"]
 )
-
 data class Book(
         val id: Int,
         val selfLink: String,

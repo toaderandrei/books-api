@@ -2,8 +2,8 @@ package com.ant.books.di
 
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
+import com.ant.books.viewmodel.BookDetailViewModel
 import com.ant.books.viewmodel.BookSearchViewModel
-import com.ant.books.viewmodel.BooksListViewModel
 import com.ant.books.viewmodel.BooksViewModelFactory
 import com.ant.books.viewmodel.ViewModelKey
 import dagger.Binds
@@ -24,6 +24,6 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(BooksListViewModel::class)
-    abstract fun bindRepoViewModel(repoViewModel: BooksListViewModel): ViewModel
+    @ViewModelKey(BookDetailViewModel::class)
+    abstract fun bindBookDetailViewModel(bookDetailViewModel: BookDetailViewModel): ViewModel
 }
