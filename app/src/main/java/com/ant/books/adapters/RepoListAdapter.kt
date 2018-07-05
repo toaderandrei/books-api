@@ -38,7 +38,8 @@ class RepoListAdapter(
         val itemBinding = DataBindingUtil.inflate<BookItemBinding>(LayoutInflater.from(parent.context),
                 R.layout.book_item,
                 parent,
-                false)
+                false,
+                dataBindingComponent)
 
         itemBinding.showDescription = showDescription
         //todo add click listener.s

@@ -15,9 +15,11 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import com.ant.books.R
+import com.ant.books.adapters.RepoListAdapter
 import com.ant.books.binding.FragmentDataBindingComponent
 import com.ant.books.databinding.BookSearchBinding
 import com.ant.books.di.Injectable
+import com.ant.books.threading.AppExecutors
 import com.ant.books.utils.autoCleared
 import com.ant.books.viewmodel.BookSearchViewModel
 import com.ant.books.viewmodel.RetryCallback
@@ -27,6 +29,9 @@ class BookSearchFragment : Fragment(), Injectable {
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
     var binding by autoCleared<BookSearchBinding>()
+
+    @Inject
+    lateinit var appExecutors: AppExecutors
 
     @Inject
     lateinit var viewmodelFactory: ViewModelProvider.Factory
@@ -51,7 +56,19 @@ class BookSearchFragment : Fragment(), Injectable {
                 .of(this, viewmodelFactory)
                 .get(BookSearchViewModel::class.java)
 
-        //todo: init adapters. not yet done
+
+        //init and bind the adapter
+        val rvAdapter = RepoListAdapter(
+                dataBindingComponent,
+                true,
+                appExecutors)
+
+        binding.repoList.adapter = rvAdapter
+
+        //init the search input listener
+        initSearchInputListener()
+
+        //add retry callback to the binding
         binding.callback = object : RetryCallback {
             override fun retry() {
                 bookSearchViewModel.refresh()

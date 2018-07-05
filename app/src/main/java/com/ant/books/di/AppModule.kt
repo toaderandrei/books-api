@@ -1,6 +1,7 @@
 package com.ant.books.di
 
 import com.ant.books.api.BooksService
+import com.ant.books.threading.AppExecutors
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -22,6 +23,12 @@ class AppModule {
                 .addConverterFactory(MoshiConverterFactory.create())
                 .build()
                 .create(BooksService::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun providesAppExecutors(): AppExecutors {
+        return AppExecutors()
     }
 
 }
