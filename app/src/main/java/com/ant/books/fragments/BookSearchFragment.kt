@@ -1,5 +1,6 @@
 package com.ant.books.fragments
 
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
@@ -8,6 +9,8 @@ import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.os.IBinder
 import android.support.v4.app.Fragment
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +19,7 @@ import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import androidx.navigation.fragment.findNavController
 import com.ant.books.R
-import com.ant.books.adapters.RepoListAdapter
+import com.ant.books.adapters.BookListAdapter
 import com.ant.books.binding.FragmentDataBindingComponent
 import com.ant.books.databinding.BookSearchBinding
 import com.ant.books.di.Injectable
@@ -39,6 +42,9 @@ class BookSearchFragment : Fragment(), Injectable {
 
     lateinit var bookSearchViewModel: BookSearchViewModel
 
+    var adapter by autoCleared<BookListAdapter>()
+
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(
@@ -57,9 +63,11 @@ class BookSearchFragment : Fragment(), Injectable {
                 .of(this, viewmodelFactory)
                 .get(BookSearchViewModel::class.java)
 
+        //init recycleview
+        initRecycleView()
 
         //init and bind the adapter
-        val rvAdapter = RepoListAdapter(
+        val rvAdapter = BookListAdapter(
                 dataBindingComponent,
                 true,
                 appExecutors)
@@ -67,6 +75,8 @@ class BookSearchFragment : Fragment(), Injectable {
             //todo check if Int can be accepted.
             navController().navigate(BookSearchFragmentDirections.showBook(book.id.toString()))
         }
+
+        adapter = rvAdapter
 
         binding.repoList.adapter = rvAdapter
 
@@ -79,6 +89,26 @@ class BookSearchFragment : Fragment(), Injectable {
                 bookSearchViewModel.refresh()
             }
         }
+    }
+
+    private fun initRecycleView() {
+        binding.repoList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+                val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+
+                val lastPos = layoutManager.findLastVisibleItemPosition()
+                if (lastPos == adapter.itemCount - 1) {
+                    //we are loading the next page.
+                    bookSearchViewModel.loadNextPage()
+                }
+            }
+        })
+
+        bookSearchViewModel.searchInput.observe(this, Observer { result ->
+            binding.resource = result
+            binding.resultCount = result?.data?.size ?: 0
+            adapter.submitList(result?.data)
+        })
     }
 
     private fun initSearchInputListener() {

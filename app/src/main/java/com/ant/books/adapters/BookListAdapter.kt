@@ -10,7 +10,7 @@ import com.ant.books.databinding.BookItemBinding
 import com.ant.books.db.Book
 import com.ant.books.threading.AppExecutors
 
-class RepoListAdapter(
+class BookListAdapter(
         private val dataBindingComponent: DataBindingComponent,
         private val showDescription: Boolean,
         appExecutors: AppExecutors,
