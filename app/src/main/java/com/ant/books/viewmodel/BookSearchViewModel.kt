@@ -5,13 +5,13 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
 import com.ant.books.db.Book
-import com.ant.books.repository.BookRepository
+import com.ant.books.repository.livedata.LiveDataBooksRepository
 import com.ant.books.utils.EmptyLiveData
 import com.ant.books.viewmodel.status.Resource
 import java.util.*
 import javax.inject.Inject
 
-class BookSearchViewModel @Inject constructor(bookRepository: BookRepository) : ViewModel() {
+class BookSearchViewModel @Inject constructor(bookRepository: LiveDataBooksRepository) : ViewModel() {
 
     val query = MutableLiveData<String>()
 
@@ -20,7 +20,7 @@ class BookSearchViewModel @Inject constructor(bookRepository: BookRepository) : 
                 if (search.isNullOrBlank()) {
                     EmptyLiveData.create()
                 } else {
-                    bookRepository.search(search)
+                    bookRepository.loadBooks(search)
                 }
             }
 

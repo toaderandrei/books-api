@@ -80,7 +80,7 @@ class BookSearchFragment : Fragment(), Injectable {
 
         binding.repoList.adapter = rvAdapter
 
-        //init the search input listener
+        //init the loadBooks input listener
         initSearchInputListener()
 
         //add retry callback to the binding
