@@ -94,7 +94,7 @@ class BookSearchFragment : Fragment(), Injectable {
     private fun initRecycleView() {
         binding.repoList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
-                val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+                val layoutManager = recyclerView?.layoutManager as LinearLayoutManager
 
                 val lastPos = layoutManager.findLastVisibleItemPosition()
                 if (lastPos == adapter.itemCount - 1) {
